@@ -1,0 +1,22 @@
+{% extends 'forms/base.html' %}
+
+{% block content %}
+  {% if student %}
+    <h2>Student Registration Summary</h2>
+    <ul>
+      <li><strong>Student Name:</strong> {{ student.student_name }}</li>
+      <li><strong>Student ID:</strong> {{ student.student_id }}</li>
+      <li><strong>Major:</strong> {{ student.get_major_display }}</li>
+      <li><strong>Class Standing:</strong> {{ student.get_class_standing_display }}</li>
+      <li><strong>Programming Languages:</strong> {{ programming_languages|join:", " }}</li>
+      <li><strong>Expected Graduation:</strong> {{ student.grad_year }}</li>
+    </ul>
+  {% else %}
+    <h2>Student Registration</h2>
+    <form method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit">Submit</button>
+    </form>
+  {% endif %}
+{% endblock %}
